@@ -11,46 +11,46 @@ from tensorflow.keras.layers import Conv2D, Dense, Flatten, GlobalAveragePooling
 from config import efficientNet_config
 
 
-def frank_model(cls):
-    input_shape  = efficientNet_config['input_shape_B0']
-    model = Sequential()
-    model.add(Conv2D(32, (3, 3), activation='relu', input_shape=input_shape)) # input_shape=(32, 32, 3)
-    model.add(MaxPooling2D((2, 2)))
-    model.add(Dropout(0.2))
-    # model.add(Conv2D(64, (3, 3), activation='relu'))
-    # model.add(MaxPooling2D((2, 2)))
-    # model.add(Dropout(0.2))
-    model.add(Conv2D(16, (3, 3), activation='relu'))
-    model.add(Flatten())
-    # model.add(Dense(16, activation='relu'))
-    model.add(Dense(cls, activation='softmax'))
-    model.summary() 
-    return model
+# def frank_model():
+#     input_shape  = efficientNet_config['input_shape_B0']
+#     model = Sequential()
+#     model.add(Conv2D(32, (3, 3), activation='relu', input_shape=input_shape)) # input_shape=(32, 32, 3)
+#     model.add(MaxPooling2D((2, 2)))
+#     model.add(Dropout(0.2))
+#     # model.add(Conv2D(64, (3, 3), activation='relu'))
+#     # model.add(MaxPooling2D((2, 2)))
+#     # model.add(Dropout(0.2))
+#     model.add(Conv2D(16, (3, 3), activation='relu'))
+#     model.add(Flatten())
+#     # model.add(Dense(16, activation='relu'))
+#     model.add(Dense(1, activation='sigmoid'))
+#     model.summary() 
+#     return model
 
 
-def mobilenetv2_model(cls):
-    input_shape  = efficientNet_config['input_shape_B0']
-    mobilenetv2 = MobileNetV2(include_top=False,
-                              weights='imagenet', 
-                              input_shape=input_shape,
-                              pooling='avg'
-                             )
+# def mobilenetv2_model():
+#     input_shape  = efficientNet_config['input_shape_B0']
+#     mobilenetv2 = MobileNetV2(include_top=False,
+#                               weights='imagenet', 
+#                               input_shape=input_shape,
+#                               pooling='avg'
+#                              )
     
-    model = Sequential()
-    model.add(mobilenetv2)
-    model.add(Dense(cls, activation='softmax'))   # cls = class
-    # 輸出網絡模型參數
-    model.summary() 
-    # dot_img_file = 'EfficientNetV2B0.png'
-    # tf.keras.utils.plot_model(model, to_file=dot_img_file, show_shapes=True)
+#     model = Sequential()
+#     model.add(mobilenetv2)
+#     model.add(Dense(1, activation='sigmoid'))   
+#     # 輸出網絡模型參數
+#     model.summary() 
+#     # dot_img_file = 'EfficientNetV2B0.png'
+#     # tf.keras.utils.plot_model(model, to_file=dot_img_file, show_shapes=True)
 
-    # 卷基層參與訓練
-    mobilenetv2.trainable = True    # 解凍與否
+#     # 卷基層參與訓練
+#     mobilenetv2.trainable = True    # 解凍與否
     
-    return model
+#     return model
 
 
-def efficientNetV2B0_model(cls):
+def efficientNetV2B0_model():
     input_shape  = efficientNet_config['input_shape_B0']
     efnv2b0 = EfficientNetV2B0(include_top=False,
                                weights='imagenet', 
@@ -61,11 +61,9 @@ def efficientNetV2B0_model(cls):
     model = Sequential()
     model.add(efnv2b0)
     #model.add(Dropout(0.5))
-    model.add(Dense(cls, activation='softmax'))   # cls = class
+    model.add(Dense(1, activation='sigmoid'))   
     # 輸出網絡模型參數
     model.summary() 
-    # dot_img_file = 'EfficientNetV2B0.png'
-    # tf.keras.utils.plot_model(model, to_file=dot_img_file, show_shapes=True)
 
     # 卷基層參與訓練
     efnv2b0.trainable = True 
@@ -73,7 +71,7 @@ def efficientNetV2B0_model(cls):
     return model
 
 
-def resnet50_model(cls):
+def resnet50_model():
     input_shape  = efficientNet_config['input_shape_B0']
     resnet50 = ResNet50(include_top=False,
                   weights='imagenet', 
@@ -83,7 +81,7 @@ def resnet50_model(cls):
     
     model = Sequential()
     model.add(resnet50)
-    model.add(Dense(cls, activation='softmax'))   # cls = class
+    model.add(Dense(1, activation='sigmoid'))   
     # 輸出網絡模型參數
     model.summary() 
     # dot_img_file = 'EfficientNetV2B0.png'
@@ -95,7 +93,7 @@ def resnet50_model(cls):
     return model
 
 
-def vgg16_model(cls):
+def vgg16_model():
     input_shape  = efficientNet_config['input_shape_B0']
     vgg16 = VGG16(include_top=False,
                   weights='imagenet', 
@@ -105,7 +103,7 @@ def vgg16_model(cls):
     
     model = Sequential()
     model.add(vgg16)
-    model.add(Dense(cls, activation='softmax'))   # cls = class
+    model.add(Dense(1, activation='sigmoid'))   
     # 輸出網絡模型參數
     model.summary() 
     # dot_img_file = 'EfficientNetV2B0.png'
