@@ -3,6 +3,8 @@
 
 # 忽略所有model 的檔案
 model/
+result/
 
 # 忽略所有dataset 的檔案
 dataset/
+dataset_20230323/
