@@ -66,7 +66,7 @@ def efficientNetV2B0_model():
     model.summary() 
 
     # 卷基層參與訓練
-    efnv2b0.trainable = True 
+    efnv2b0.trainable = True  ###### True!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
     
     return model
 
